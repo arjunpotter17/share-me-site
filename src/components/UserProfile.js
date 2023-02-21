@@ -107,7 +107,7 @@ const UserProfile = () => {
               <MasonryLayout pins={pins}/>
             </div>
           ):(
-            <p className='text-center margin-auto'>You have not created any posts yet!</p>
+            <p className='text-center margin-auto'>No posts availabe</p>
           )
         }
           
