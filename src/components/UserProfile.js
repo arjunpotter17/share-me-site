@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { AiOutlineLogout } from 'react-icons/ai';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, json } from 'react-router-dom';
 import { googleLogout } from '@react-oauth/google';
 
 import { userCreatedPinsQuery, userQuery, userSavedPinsQuery } from '../utils/data';
@@ -15,11 +15,15 @@ const UserProfile = () => {
   const [pins, setpins] = useState(null)
   const [text, settext] = useState('Created')
   const [activeBtn, setactiveBtn] = useState('created')
+  const [tempUser, setTempUser] = useState()
   const navigate = useNavigate();
   const {userId} = useParams();
 
   const activeBtnStyles = 'bg-red-600 p-1 text-white  rounded-full w-20 outline-none mt-5'
   const notActiveBtnStyles = 'bg-primary p-1 mr-4 border-black text-black  rounded-full w-20 outline-none mt-5'
+
+  console.log('this is userID', userId)
+  console.log('this is user._id', user?._id)
 
   const clickhandler = () =>{
     googleLogout();
@@ -27,6 +31,12 @@ const UserProfile = () => {
     navigate('/');
     window.location.reload()
   }
+
+  useEffect(()=>{
+    const user = JSON.parse(localStorage.getItem('user'));
+    console.log('user from localStorage', user)
+    setTempUser(user?.sub)
+  },[])
 
   useEffect(()=>{
     const query = userQuery(userId);
@@ -67,7 +77,7 @@ const UserProfile = () => {
             />
             <h1 className='font-bold text-center mt-3'>{user.userName}</h1>
             <div className='absolute top-0 z-1 right-0 p-2'>
-              {userId === user._id && (
+              {tempUser === user._id && (
                 <button
                 type="button"
                 className=" bg-white p-2 rounded-full cursor-pointer outline-none shadow-md"
@@ -107,7 +117,7 @@ const UserProfile = () => {
               <MasonryLayout pins={pins}/>
             </div>
           ):(
-            <p className='text-center margin-auto'>No posts availabe</p>
+            <p className='text-center margin-auto'>You have not created any posts yet!</p>
           )
         }
           

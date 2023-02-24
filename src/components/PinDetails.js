@@ -18,7 +18,8 @@ const PinDetails = ({ user }) => {
   const { pinId } = useParams();
 
   const addComment = () => {
-    client.patch(pinId)
+    if(comment){
+      client.patch(pinId)
       .setIfMissing({ comments: [] })
       .insert('after', 'comments[-1]', [{
         comment,
@@ -34,6 +35,8 @@ const PinDetails = ({ user }) => {
         setcomment('');
         setaddingComment(false)
       })
+    }
+    
   }
 
   const fetchPinDetails = () => {
@@ -80,6 +83,7 @@ const PinDetails = ({ user }) => {
               >
                 <MdDownloadForOffline />
               </a>
+
             </div>
             <a
               href={pinDetails[0]?.destination}
@@ -88,6 +92,7 @@ const PinDetails = ({ user }) => {
             >
               {pinDetails[0]?.destination.length > 20 ? pinDetails[0]?.destination.slice(8, 20) : pinDetails[0].destination.slice(8)}
             </a>
+            
           </div>
           <div>
             <h1 className='text-4xl font-bold break-words mt-3'>{pinDetails[0].title}</h1>
@@ -137,7 +142,7 @@ const PinDetails = ({ user }) => {
             />
             <button
               type='button'
-              className='bg-red-500 text-white rounded-full px-6 py-2 font-semibold text-base outline-none'
+              className={comment?'bg-red-500 text-white rounded-full px-6 py-2 font-semibold text-base outline-none':'bg-gray-100 text-gray-400 rounded-full px-6 py-2 font-semibold text-base outline-none'}
               onClick={addComment}
             >
               {addingComment ? 'Posting...' : 'Post'}
