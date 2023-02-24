@@ -138,7 +138,7 @@ const Pin = ({ pin }) => {
                
             </Link>
             <div className='lg:hidden'>
-            {alreadySaved ? (
+            {alreadySaved && user ? (
                                     <button type='button' className='bg-red-600 opacity-100 text-white px-3 py-1 text-base rounded-2xl hover:shadow-md outline-none'>
                                         {pin?.save?.length}  Saved
                                     </button>
