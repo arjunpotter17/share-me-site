@@ -155,7 +155,7 @@ const Pin = ({ pin }) => {
                                     </button>)
                                 }
             {
-                    pin?.postedBy?._id == user.sub && (
+                    pin?.postedBy?._id == user?.sub && (
                         <button
                             type='button'
                             onClick={(e) => {
