@@ -11,6 +11,7 @@ import logo from '../assets/logo.png'
 import { userQuery } from '../utils/data'
 import { fetchUser } from '../utils/fetchUser'
 
+
 const Home = () => {
     const userInfo = fetchUser()
     const scrollRef = useRef()
@@ -37,7 +38,7 @@ const Home = () => {
             </div>
             <div className='flex md:hidden flex-row'>
                 <div className="p-2 w-full flex flex-row justify-between items-center shadow-md">
-                    <HiMenu fontSize={40} className='cursor-pointer' onClick={() => setToggleSidebar(true)}/>
+                    <HiMenu fontSize={40} className='cursor-pointer' onClick={() => setToggleSidebar(true)} />
                     <Link to='/'>
                         <img src={logo} alt="logo" className='w-28' />
                     </Link>
@@ -47,21 +48,21 @@ const Home = () => {
                     </Link>}
 
                     {!user && <Link to='/login'>
-                        
+
                         <p>Login</p>
                     </Link>}
                 </div>
 
-               
+
                 {toggleSidebar && (
-        <div className="fixed w-4/5 bg-white h-screen overflow-y-auto shadow-md z-10 animate-slide-in">
-          <div className="absolute w-full flex justify-end items-center p-2">
-            <AiFillCloseCircle fontSize={30} className="cursor-pointer" onClick={() => setToggleSidebar(false)} />
-          </div>
-          <Sidebar closeToggle={setToggleSidebar} user={user && user} />
-        </div>
-        )}
-                
+                    <div className="fixed w-4/5 bg-white h-screen overflow-y-auto shadow-md z-10 animate-slide-in">
+                        <div className="absolute w-full flex justify-end items-center p-2">
+                            <AiFillCloseCircle fontSize={30} className="cursor-pointer" onClick={() => setToggleSidebar(false)} />
+                        </div>
+                        <Sidebar closeToggle={setToggleSidebar} user={user && user} />
+                    </div>
+                )}
+
             </div>
             <div className='pb-2 flex-1 h-screen overflow-y-scroll' ref={scrollRef}>
                 <Routes>
@@ -69,6 +70,12 @@ const Home = () => {
                     <Route exact path="/*" element={<Pins user={user && user} />} />
                 </Routes>
             </div>
+
+            <a href='https://portfolio-six-gold-18.vercel.app/#projects'>
+                <footer className='absolute bottom-16 md:right-11 md:bottom-8 right-5 md:grayscale hover:grayscale-0'>
+                    <img src='/assets/footer-logo.jpg' alt='home-btn' className=' rounded-full mx-auto object-cover w-[55px] h-[55px]' />
+                </footer>
+            </a>
 
         </div>
     )
