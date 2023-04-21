@@ -56,7 +56,7 @@ const Login = () => {
                         <div className='shadow-2xl'>
                             <GoogleLogin
                                 onSuccess={(res) => responseGoogle(res)}
-                                onFailure={(res) => responseGoogle(res)}
+                                onFailure={(err) => console.log(err)}
                                 cookiePolicy="single_host_origin"
                             />
                         </div>
